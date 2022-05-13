@@ -1,4 +1,10 @@
 
+/* 인터넷 익스플로러(IE)에서 main을 지원하지 않아, */
+/* 태그가 적용이 안되므로, 임의로 하나 정의 */
+main {
+    display:block;
+}
+
 .unselectable {
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -13,4 +19,46 @@
 .topview {
     position: relative;
     display: table;
+}
+
+.inputField {
+    position: relative;
+    margin-top: 16px;
+    width: 85%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+}
+
+.inputField > label {
+    font-family: 'nanum_square';
+    font-size: 10pt;
+    color: #707070;
+}
+
+.inputField > input {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 0px;
+    margin-top: 4px;
+}
+
+.inputField > button:not(.kakaoLogin_wide) {
+    position: relative;
+    height: 24px;
+    border: 1px solid #d2d2d2;
+    background: #a8dbff;
+    border-radius: 5px;
+    box-sizing: content-box;
+    box-shadow: 0px 0px 5px #d2d2d2;
+    font-family: 'nanum_square';
+    font-size: 10pt;
+    color: #707070;
+    width: 100%;
+    padding: 0px;
+}
+
+.inputField > button:hover:not(.kakaoLogin_wide) {
+    background: #75b1ff;
 }

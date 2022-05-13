@@ -26,15 +26,6 @@ input[type=text],input[type=password] {
     padding-bottom: 15px;
 }
 
-.inputField {
-    position: relative;
-    display: grid;
-    margin-top: 16px;
-    width: 85%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
 .inputField > label {
     font-family: 'nanum_square';
     font-size: 10pt;
