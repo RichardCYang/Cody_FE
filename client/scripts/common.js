@@ -1,4 +1,49 @@
 
+/* 크로스 플랫폼 클래스 선택자 */
+function getElementsByClassNameCompatible( classname ){
+    if( document.getElementsByClassName ){
+        return document.getElementsByClassName(classname);
+    }
+    var nodes = document.getElementsByTagName('*');
+    var classes = [];
+    for(var i = 0; i < nodes.length; i++){
+        if( nodes[i].className.indexOf( classname ) > -1 ){
+            classes[ classes.length ] = nodes[i];
+        }
+    }
+    return classes;
+}
+/* 크로스 플랫폼 쿼리 선택자 */
+function querySelectorCompatible( name ){
+    if( document.querySelector ){
+        return document.querySelector(name);
+    }
+    /* 클래스 선택자 */
+    if( name.charAt(0) == '.' ){
+        name = name.substring(1);
+        return getElementsByClassNameCompatible(name)[0];
+    }
+    /* 아이디 선택자 */
+    if( name.charAt(0) == '#' ){
+        name = name.substring(1);
+        return document.getElementById(name);
+    }
+    return null;
+}
+/* 크로스 플랫폼 이벤트 등록 함수 */
+function addEvent( element,event,callback ){
+    if(element.addEventListener){
+        element.addEventListener(event,callback);
+        return;
+    }
+    if(element.attachEvent){
+        element.attachEvent('on' + event,callback);
+        return;
+    }
+    element['on' + event] = callback;
+    return;
+}
+
 function setClassName( target,classname ){
     target.setAttribute('class',classname);
 }
@@ -13,7 +58,7 @@ function setChangeSubClassName( target,classname ){
 function appendDOM( parent,tag,classname,event ){
     var dom = document.createElement(tag);
     classname ? dom.setAttribute('class',classname) : null;
-    event ? dom.addEventListener(event.type,event.callback) : null;
+    event ? addEvent(dom,event.type,event.callback) : null;
     parent.appendChild(dom);
     return dom;
 }
@@ -23,12 +68,17 @@ function includeHTML( parent,path ){
     xhr.open('GET',path,false);
     xhr.send();
 
-    var dom = new DOMParser().parseFromString(xhr.responseText,'text/html');
-    dom = dom.body.children[0];
-    parent.insertBefore(dom,parent.children[0]);
+    if( window.DOMParser ){
+        var dom = new DOMParser().parseFromString(xhr.responseText,'text/html');
+        dom = dom.body.children[0];
+        parent.insertBefore(dom,parent.children[0]);
+    }else{
+        parent.innerHTML = xhr.responseText + parent.innerHTML;
+        console.log(parent.innerHTML);
+    }
 }
 
-window.addEventListener('load',function(event){
+addEvent(window,'load',function(event){
     includeHTML(document.body,'./com/menu.html');
     includeHTML(document.body,'./com/header.html');
 });
