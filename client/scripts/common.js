@@ -52,12 +52,16 @@ function setChangeSubClassName( target,classname ){
     var child = target.children;
     for(var i = 0; i < child.length; i++){
         setClassName(child[i],classname);
+        /* For IE5-9 */
+        child[i].className = classname;
     }
 }
 
 function appendDOM( parent,tag,classname,event ){
     var dom = document.createElement(tag);
     classname ? dom.setAttribute('class',classname) : null;
+    /* For IE5-9 */
+    classname ? dom.className = classname : '';
     event ? addEvent(dom,event.type,event.callback) : null;
     parent.appendChild(dom);
     return dom;
@@ -68,14 +72,7 @@ function includeHTML( parent,path ){
     xhr.open('GET',path,false);
     xhr.send();
 
-    if( window.DOMParser ){
-        var dom = new DOMParser().parseFromString(xhr.responseText,'text/html');
-        dom = dom.body.children[0];
-        parent.insertBefore(dom,parent.children[0]);
-    }else{
-        parent.innerHTML = xhr.responseText + parent.innerHTML;
-        console.log(parent.innerHTML);
-    }
+    parent.insertAdjacentHTML('afterbegin',xhr.responseText);
 }
 
 addEvent(window,'load',function(event){

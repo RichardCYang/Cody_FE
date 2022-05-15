@@ -15,19 +15,30 @@ function initBannerImgs(){
     var bannerIndex = querySelectorCompatible('.contentIndexes');
     var bannerItem,bannerImg;
 
-    console.log( banner );
-
     for(var i = 0; i < window.imgs.length; i++){
         bannerImg = appendDOM(banner,'img');
         bannerItem = appendDOM(bannerIndex,'div','normalIndex',{'type':'click','callback':function(event){
             setChangeSubClassName(bannerIndex,'normalIndex');
+
+            event.target = event.target ? event.target : event.srcElement;
             event.target.setAttribute('class','activeIndex');
+            /* For IE5-9 */
+            event.target.className = 'activeIndex';
 
             scrollBanner(event.target.idx);
         }});
         bannerItem.idx = i;
         bannerImg.src = window.imgs[i];
+        bannerImg.style.left = (i * 1280) + 'px';
     }
+}
+
+function onMenuButton_hovered(target){
+    target.style.background = '#75b1ff';
+}
+
+function onMenuButton_unhovered(target){
+    target.style.background = 'none';
 }
 
 window.onload = function(){

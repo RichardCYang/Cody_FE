@@ -1,8 +1,9 @@
 @font-face {
     font-family: recipekorea;
-    src: url(../fonts/Recipekorea.ttf),
+    src: url(../fonts/Recipekorea.eot);
+    src: url(../fonts/Recipekorea.eot?#iefix) format('embedded-opentype'),
         url(../fonts/Recipekorea.woff) format('woff'),
-        url(../fonts/Recipekorea.eot) format('embedded-opentype');
+        url(../fonts/Recipekorea.ttf);
 }
 
 @font-face {

@@ -25,31 +25,24 @@
     position: absolute;
     bottom: 0px;
     text-align: center;
+    left: 0px;
 }
 
-.contentIndexes > div {
+.contentIndexes div {
     position: relative;
     display: inline-block;
+    zoom: 1;
+    *display: inline;
+    _display: inline;
     width: 16px;
     height: 50%;
-    border-radius: 15px;
     margin: 5px;
 }
 
 .normalIndex {
-    background: #909090;
-    opacity: 0.5;
-    /* IE 8 */
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=133)";
-    /* IE 7 */
-    filter: alpha(opacity=133);
+    background: url(../icons/bannerlist_button_normal.png);
 }
 
 .activeIndex {
-    background: #ebebeb;
-    opacity: 0.8;
-    /* IE 8 */
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=224)";
-    /* IE 7 */
-    filter: alpha(opacity=224);
+    background: url(../icons/bannerlist_button.png);
 }
