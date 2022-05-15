@@ -13,6 +13,9 @@ const getMIME = (url) => {
     if( url.indexOf('.ttf') > -1 ){
         return 'application/x-font-ttf';
     }
+    if( url.indexOf('.htc') > -1 ){
+        return 'text/x-component';
+    }
     return 'text/text';
 }
 /* URI로부터 실제 URL을 가져오는 함수 */

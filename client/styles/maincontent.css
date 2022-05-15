@@ -31,18 +31,17 @@
 .contentIndexes div {
     position: relative;
     display: inline-block;
-    zoom: 1;
-    *display: inline;
-    _display: inline;
     width: 16px;
     height: 50%;
     margin: 5px;
 }
 
 .normalIndex {
-    background: url(../icons/bannerlist_button_normal.png);
+    background: rgba(176, 176, 176, 0.4);
+    border-radius: 15px;
 }
 
 .activeIndex {
-    background: url(../icons/bannerlist_button.png);
+    background: rgba(234, 234, 234, 0.8);
+    border-radius: 15px;
 }

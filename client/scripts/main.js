@@ -1,7 +1,7 @@
 
 function scrollBanner( scrollamount ){
-    var banner = querySelectorCompatible('.banneritems');
-    var bannerIndex = querySelectorCompatible('.contentIndexes');
+    var banner = document.querySelector('.banneritems');
+    var bannerIndex = document.querySelector('.contentIndexes');
     var target = scrollamount * -1280;
     var animTimer = setInterval(function(){
         banner.style.left = (banner.offsetLeft + (banner.offsetLeft >= (scrollamount * -1280) ? -80 : 80)) + 'px';
@@ -11,8 +11,6 @@ function scrollBanner( scrollamount ){
     },15);
     setChangeSubClassName(bannerIndex,'normalIndex');
     bannerIndex.children[scrollamount].setAttribute('class','activeIndex');
-    /* For IE5-9 */
-    bannerIndex.children[scrollamount].className = 'activeIndex';
 }
 
 function startBannerScrollTimer( timedelay ){
@@ -23,21 +21,18 @@ function startBannerScrollTimer( timedelay ){
             window.curBannerIdx = 0;
         }
 
-        console.log(window.curBannerIdx);
         scrollBanner(window.curBannerIdx);
     },timedelay * 1000);
 }
 
 function initBannerImgs(){
-    var banner = querySelectorCompatible('.banneritems');
-    var bannerIndex = querySelectorCompatible('.contentIndexes');
+    var banner = document.querySelector('.banneritems');
+    var bannerIndex = document.querySelector('.contentIndexes');
     var bannerItem,bannerImg;
 
     for(var i = 0; i < window.imgs.length; i++){
         bannerImg = appendDOM(banner,'img');
         bannerItem = appendDOM(bannerIndex,'div','normalIndex',{'type':'click','callback':function(event){
-            event.target = event.target ? event.target : event.srcElement;
-
             /* 사용자가 이미 선택되어 있는 배너를 다시 선택하면 */
             /* 같은 위치에 배너를 다시 스크롤 시키면서 */
             /* 배너가 깜빡이는 현상(Flickering)이 발생함 */
@@ -55,14 +50,6 @@ function initBannerImgs(){
         bannerImg.src = window.imgs[i];
         bannerImg.style.left = (i * 1280) + 'px';
     }
-}
-
-function onMenuButton_hovered(target){
-    target.style.background = '#75b1ff';
-}
-
-function onMenuButton_unhovered(target){
-    target.style.background = 'none';
 }
 
 window.onload = function(){
