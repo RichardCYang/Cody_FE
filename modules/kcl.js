@@ -14,26 +14,36 @@ embededFunctions['출력'] = (args) => {
 }
 
 const stripQuotation = (str) => {
-    if( str.startsWith("'") || str.startsWith('"') ){
+    if( str.startsWith('"') || str.startsWith("'") ){
         str = str.substring(1);
     }
-    if( str.endsWith("'") || str.endsWith('"') ){
+    if( str.endsWith('"') || str.endsWith("'") ){
         str = str.substring(0,str.length - 1);
     }
     return str;
 }
-const codeparser = (parseToken,callback) => {
-    if( parseToken ){
-        parseToken = parseToken.filter(token => token.trim().length != 0);
-        for(let j = 0; j < parseToken.length; j++){
-            let token = parseToken[j].split(',');
-            if( token ){
-                if( callback ){
-                    callback(token);
+const parseStatement = (state) => {
+    let status = false;
+    let data = '';
+    for(let i = 0; i < state.length; i++){
+        if( state.charAt(i) === '(' ){
+            if(!status){
+                status = true;
+            }
+        }
+        if( status ){
+            data = data + state.charAt(i);
+        }
+        if( state.charAt(i) === ')' ){
+            if(status){
+                if( i == state.length - 1 ){
+                    status = false;
                 }
             }
         }
     }
+    data = data.substring(1,data.length - 2);
+    return data.split(',');
 }
 const interpret = (lines) => {
     /* 변수 선언부 및 함수 호출부 파싱 */
@@ -42,24 +52,21 @@ const interpret = (lines) => {
         let funcCallExp = new RegExp(/@호출\((.*?)\)/);
         /* 변수 선언부 파싱 */
         if( varDecExp.test(lines[i]) ){
-            let parseToken = lines[i].split(varDecExp);
-            codeparser(parseToken,(token) => {
-                if( token.length > 1 ){
-                    vars[ stripQuotation(token[0] ) ] = token[1];
-                }
-            });
+            let parseToken = parseStatement(lines[i]);
+            if( parseToken.length > 1 ){
+                vars[ stripQuotation(parseToken[0]) ] = parseToken[1];
+            }
         }
         /* 함수 호출부 파싱 */
         if( funcCallExp.test(lines[i]) ){
-            let parseToken = lines[i].split(funcCallExp);
-            codeparser(parseToken,(token) => {
-                if( token.length > 0 ){
-                    let func = embededFunctions[ stripQuotation(token[0]) ];
-                    if( func ){
-                        func(token);
-                    }
+            let parseToken = parseStatement(lines[i]);
+            parseToken = parseToken.map(data => new RegExp(/@참조\('(.*?)'\)/).test(data) ? vars[ data.split(/@참조\('(.*?)'\)/)[1] ] : data);
+            if( parseToken.length > 0 ){
+                let func = embededFunctions[ stripQuotation(parseToken[0]) ];
+                if( func ){
+                    func(parseToken);
                 }
-            });
+            }
         }
     }
 }
