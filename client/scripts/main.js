@@ -48,7 +48,7 @@ function initBannerImgs(){
         }});
         bannerItem.idx = i;
         bannerImg.src = window.imgs[i];
-        bannerImg.style.left = (i * 1280) + 'px';
+        bannerImg.style.left = (i * banner.clientWidth) + 'px';
     }
 }
 

@@ -1,13 +1,6 @@
 
 /* 인터넷 익스플로러(IE)에서 main과 nav를 지원하지 않아, */
 /* 태그가 적용이 안되므로, 임의로 하나 정의 */
-main {
-    display:block;
-}
-
-nav {
-    display:block;
-}
 
 .unselectable {
     -moz-user-select: none;
@@ -65,4 +58,11 @@ nav {
 
 .inputField > button:hover:not(.kakaoLogin_wide) {
     background: #75b1ff;
+}
+
+.maincontent {
+    position: relative;
+    width: 1280px;
+    height: 100%;
+    left: calc(50% - 640px);
 }

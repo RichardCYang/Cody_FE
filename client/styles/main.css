@@ -7,33 +7,36 @@ body {
     overflow: hidden;
 }
 
-.nav {
+module-navbar {
+    display: block;
     position: relative;
     width: 100%;
     height: 64px;
     text-align: center;
 }
 
-.nav > div {
+module-navbar > div {
     display: inline-block;
     position: relative;
     width: 1280px;
-    top: 45px;
+    top: 42px;
 }
 
-.nav > div > button {
+module-navbar > div > button {
     font-family: 'nanum_square';
+    font-size: 10pt;
     border: none;
     background: none;
     color: #707070;
     float: right;
+    margin-left: 10px;
 }
 
-.nav > div > button:hover {
+module-navbar  > div > button:hover {
     color: #75b1ff;
 }
 
-.nav > h2 {
+module-navbar > h2 {
     font-family: 'recipekorea';
     font-size: 24pt;
     font-weight: 500;
@@ -46,7 +49,8 @@ body {
     color: #a8dbff;
 }
 
-menu {
+module-menu {
+    display: block;
     position: relative;
     width: 100%;
     height: 30px;
@@ -59,12 +63,12 @@ menu {
     padding: 0px;
 }
 
-menu > div {
+module-menu > div {
     display: inline-block;
     height: 100%;
 }
 
-main {
+.main {
     position: relative;
     width: 100%;
     height: calc(100% - 94px);
@@ -76,7 +80,7 @@ main {
     height: 100%;
 }
 
-menu > div > button {
+module-menu > div > button {
     position: relative;
     height: 100%;
     border: none;
@@ -87,7 +91,7 @@ menu > div > button {
     font-weight: 800;
 }
 
-menu > div > button:hover {
+module-menu > div > button:hover {
     background: #75b1ff;
 }
 
