@@ -1,7 +1,34 @@
 
 const http = require('http');
 const fs   = require('fs');
+const kcl  = require('./modules/kcl');
 
+const readdirSyncRecursive = (path) => {
+    let filesArr = [];
+    try{
+        let files = fs.readdirSync( path );
+        for(let i = 0; i < files.length; i++){
+            let lstat = fs.lstatSync( path + '/' + files[i]);
+            if( lstat.isDirectory() ){
+                let subfiles = readdirSyncRecursive( path + '/' + files[i] );
+                filesArr = filesArr.concat( subfiles );
+            }else{
+                filesArr.push( path + '/' + files[i] );
+            }
+        }
+    }catch(err){
+        console.log(err);
+    }
+    return filesArr;
+}
+const loadAllScript = () => {
+    let scriptFiles = readdirSyncRecursive('./scripts');
+    scriptFiles.forEach(file => {
+        let data = fs.readFileSync(file,'utf-8');
+        kcl.parse(data);
+        kcl.executeHook('시작');
+    })
+}
 /* URL로부터 MIME 타입을 가져오는 함수 */
 const getMIME = (url) => {
     if( url.indexOf('.html') > -1 ){
@@ -30,6 +57,8 @@ const loadResource = (uri) => {
     let data = fs.readFileSync(decodeURIComponent(url));
     return data;
 }
+/* 설정 스크립트(KCL) 불러오기 */
+loadAllScript();
 /* 테스트용 웹 서버 생성 */
 http.createServer((req,res) => {
     res.writeHead(200,{'Content-Type':getMIME(getUrlFromUri(req.url))});
