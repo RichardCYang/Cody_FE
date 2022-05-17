@@ -15,13 +15,20 @@ function scrollBanner( scrollamount ){
 
 function startBannerScrollTimer( timedelay ){
     setInterval(function(){
-        window.curBannerIdx = window.curBannerIdx + 1;
+        /* 브라우저가 최소화 되거나, 페이지가 다른 탭으로 이동했을 때 */
+        /* 브라우저가 인터벌 시간을 자동으로 1초로 최적화 시켜버리기 때문에 */
+        /* 배너가 이상하게 떨리면서 이동하지 않는 버그가 발생 */
+        /* 따라서 브라우저가 최소화 되거나 탭이 이동(Unfocused) 상태이면 */
+        /* 타이머 내용을 실행시키지 않음으로써, 버그 방지 */
+        if( document.hasFocus() ){
+            window.curBannerIdx = window.curBannerIdx + 1;
         
-        if( window.curBannerIdx > window.imgs.length - 1 ){
-            window.curBannerIdx = 0;
-        }
+            if( window.curBannerIdx > window.imgs.length - 1 ){
+                window.curBannerIdx = 0;
+            }
 
-        scrollBanner(window.curBannerIdx);
+            scrollBanner(window.curBannerIdx);
+        }
     },timedelay * 1000);
 }
 

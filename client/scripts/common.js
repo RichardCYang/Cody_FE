@@ -44,7 +44,18 @@ function includeHTML( parent,path ){
     }
 }
 
+function toggleOnlyLoggedElement(){
+    var elements = document.getElementsByClassName('showonlylogged');
+    for(var i = 0; i < elements.length; i++){
+        if( !sessionStorage.session_id ){
+            /* 세션 정보가 없으면 로그인 전용 요소들을 숨김 */
+            elements[i].style.display = 'none';
+        }
+    }
+}
+
 addEventListener('load',function(event){
     includeHTML(document.body,'./com/menu.html');
     includeHTML(document.body,'./com/header.html');
+    toggleOnlyLoggedElement();
 });
