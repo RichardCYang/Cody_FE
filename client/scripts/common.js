@@ -18,32 +18,6 @@ function appendDOM( parent,tag,classname,event ){
     return dom;
 }
 
-function searchTag( parent,tagname ){
-    var tags = parent.getElementsByTagName('*');
-    var matchTags = [];
-    for(var i = 0; i < tags.length; i++){
-        if( tags[i].tagName.toUpperCase().indexOf(tagname.toUpperCase()) > -1 ){
-            matchTags.push(tags[i]);
-        }
-    }
-    return matchTags;
-}
-
-function includeHTML( parent,path ){
-    var xhr = new XMLHttpRequest;
-    xhr.open('GET',path,false);
-    xhr.send();
-
-    /* 임시 가상DOM 생성 */
-    var virtualDOM = document.createElement('div');
-    virtualDOM.innerHTML = xhr.responseText;
-
-    var module = searchTag(virtualDOM,'module')[0];
-    if( module ){
-        parent.insertBefore(module,parent.children[0]);
-    }
-}
-
 function toggleOnlyLoggedElement(){
     var elements = document.getElementsByClassName('showonlylogged');
     for(var i = 0; i < elements.length; i++){
@@ -55,7 +29,5 @@ function toggleOnlyLoggedElement(){
 }
 
 addEventListener('load',function(event){
-    includeHTML(document.body,'./com/menu.html');
-    includeHTML(document.body,'./com/header.html');
     toggleOnlyLoggedElement();
 });
