@@ -42,7 +42,6 @@ function initBannerImgs(){
             if(window.curBannerIdx == event.target.idx){
                 return;
             }
-
             window.curBannerIdx = event.target.idx;
             scrollBanner(event.target.idx);
         }});

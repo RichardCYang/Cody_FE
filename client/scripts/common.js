@@ -13,7 +13,7 @@ function setChangeSubClassName( target,classname ){
 function appendDOM( parent,tag,classname,event ){
     var dom = document.createElement(tag);
     classname ? dom.setAttribute('class',classname) : null;
-    event ? parent.addEventListener(event.type,event.callback) : null;
+    event ? dom.addEventListener(event.type,event.callback) : null;
     parent.appendChild(dom);
     return dom;
 }
