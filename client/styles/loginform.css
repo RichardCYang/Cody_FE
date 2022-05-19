@@ -3,6 +3,16 @@ body {
     margin: 0px;
 }
 
+bar {
+    display: inline;
+    position: absolute;
+    height: 50%;
+    width: 1px;
+    background: #d2d2d2;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 input[type=text],input[type=password] {
     background: white;
     height: 28px;
@@ -33,4 +43,28 @@ input[type=text],input[type=password] {
     padding: 0px;
     margin-top: 20px;
     width: 100%;
+}
+
+.loginOptions {
+    display: inline-table;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 5px;
+}
+
+.loginOptions > button {
+    position: relative;
+    background: none;
+    border: none;
+    font-family: 'nanum_square';
+    color: #b3b3b3;
+    font-size: 8pt;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    transform: translateY(-25%);
+}
+
+.loginOptions > button:hover {
+    color: #75b1ff;
 }
