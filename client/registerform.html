@@ -13,20 +13,17 @@
 </head>
 <body>
     <header>
-        <h2 class="unselectable clickable" onclick="window.location.href = '../index.html'">코디</h2>
-        <div>
-            <button class="unselectable clickable" onclick="window.location.href = '../loginform.html'">로그인</button>
-            <button class="unselectable clickable" onclick="window.location.href = '../registerform.html'">회원가입</button>
+        <div class="header_wrap">
+            <h2 class="unselectable clickable" onclick="window.location.href = '../index.html'">코디</h2>
+            <div class="menubox">
+                <button class="unselectable clickable showonlylogged">내 프로필</button>
+                <button class="unselectable clickable" onclick="window.location.href = '../board.html'">커뮤니티</button>
+                <button class="unselectable clickable">로드맵</button>
+                <button class="unselectable clickable">가이드</button>
+                <div class="unselectable clickable usermenu"></div>
+            </div>
         </div>
     </header>
-    <nav>
-        <div>
-            <button class="unselectable clickable showonlylogged">내 프로필</button>
-            <button class="unselectable clickable" onclick="window.location.href = '../board.html'">커뮤니티</button>
-            <button class="unselectable clickable">로드맵</button>
-            <button class="unselectable clickable">가이드</button>
-        </div>
-    </nav>
     <div class="main">
         <div id="regForm">
             <div class="inputField">

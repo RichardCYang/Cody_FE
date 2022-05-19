@@ -6,6 +6,15 @@
     text-align: center;
 }
 
+.banneritems {
+    transition: .3s ease-out;
+    display: flex;
+}
+
+.banneritems > img {
+    flex-shrink: 0;
+}
+
 .slidercontent {
     position: relative;
     display: inline-block;

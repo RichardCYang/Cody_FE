@@ -1,14 +1,11 @@
 
 function scrollBanner( scrollamount ){
+    updateBannerWide();
+
     var banner = document.querySelector('.banneritems');
     var bannerIndex = document.querySelector('.contentIndexes');
-    var target = scrollamount * -1280;
-    var animTimer = setInterval(function(){
-        banner.style.left = (banner.offsetLeft + (banner.offsetLeft >= (scrollamount * -1280) ? -80 : 80)) + 'px';
-        if( banner.offsetLeft == target ){
-            clearInterval(animTimer);
-        }
-    },15);
+    banner.style.marginLeft = (scrollamount * banner.clientWidth * -1) + 'px';
+
     setChangeSubClassName(bannerIndex,'normalIndex');
     bannerIndex.children[scrollamount].setAttribute('class','activeIndex');
 }
@@ -32,13 +29,21 @@ function startBannerScrollTimer( timedelay ){
     },timedelay * 1000);
 }
 
+function updateBannerWide(){
+    var banner = document.querySelector('.banneritems');
+    var bannerImg = document.getElementsByClassName('bannerImgs');
+    for(var i = 0; i < bannerImg.length; i++){
+        bannerImg[i].style.width = banner.clientWidth + 'px';
+    }
+}
+
 function initBannerImgs(){
     var banner = document.querySelector('.banneritems');
     var bannerIndex = document.querySelector('.contentIndexes');
     var bannerItem,bannerImg;
 
     for(var i = 0; i < window.imgs.length; i++){
-        bannerImg = appendDOM(banner,'img');
+        bannerImg = appendDOM(banner,'img','bannerImgs');
         bannerItem = appendDOM(bannerIndex,'div','normalIndex',{'type':'click','callback':function(event){
             /* 사용자가 이미 선택되어 있는 배너를 다시 선택하면 */
             /* 같은 위치에 배너를 다시 스크롤 시키면서 */
@@ -54,7 +59,6 @@ function initBannerImgs(){
         }});
         bannerItem.idx = i;
         bannerImg.src = window.imgs[i];
-        bannerImg.style.left = (i * banner.clientWidth) + 'px';
     }
 }
 

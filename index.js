@@ -13,8 +13,8 @@ const getMIME = (url) => {
     if( url.indexOf('.ttf') > -1 ){
         return 'application/x-font-ttf';
     }
-    if( url.indexOf('.htc') > -1 ){
-        return 'text/x-component';
+    if( url.indexOf('.svg') > -1 ){
+        return 'image/svg+xml';
     }
     return 'text/text';
 }
