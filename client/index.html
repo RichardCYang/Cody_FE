@@ -39,4 +39,14 @@
     <footer>
     </footer>
 </body>
+<!-- 9버전 이하 익스플로러 화면 표시 막기 (지원중단)-->
+<!--[if lte IE 9]>
+    <script>
+        var child = document.body.children;
+        for(var i = 0; i < child.length; i++){
+            document.body.removeChild( child[i] );
+        }
+        document.body.innerHTML = '';
+    </script>
+<![endif]-->
 </html>

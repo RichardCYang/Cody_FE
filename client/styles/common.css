@@ -1,7 +1,4 @@
 
-/* 인터넷 익스플로러(IE)에서 main과 nav를 지원하지 않아, */
-/* 태그가 적용이 안되므로, 임의로 하나 정의 */
-
 header {
     position: relative;
     width: 100%;
