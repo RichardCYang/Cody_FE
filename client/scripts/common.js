@@ -1,4 +1,27 @@
 
+function onStatusResizing( onstart,oncontinue,onend ){
+    var resizeTimer = null;
+    var isResizing = false;
+    window.addEventListener('resize',function(event){
+        if( oncontinue ){
+            oncontinue();
+        }
+        if( !isResizing ){
+            if( onstart ){
+                onstart();
+            }
+            isResizing = true;
+        }
+        clearTimeout( resizeTimer );
+        resizeTimer = setTimeout(function(){
+            if( onend ){
+                onend();
+            }
+            isResizing = false;
+        },500);
+    });
+}
+
 function setClassName( target,classname ){
     target.setAttribute('class',classname);
 }

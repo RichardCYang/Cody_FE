@@ -4,7 +4,8 @@ function scrollBanner( scrollamount ){
 
     var banner = document.querySelector('.banneritems');
     var bannerIndex = document.querySelector('.contentIndexes');
-    banner.style.marginLeft = (scrollamount * banner.clientWidth * -1) + 'px';
+
+    banner.style.left = (scrollamount * banner.clientWidth * -1) + 'px';
 
     setChangeSubClassName(bannerIndex,'normalIndex');
     bannerIndex.children[scrollamount].setAttribute('class','activeIndex');
@@ -32,9 +33,7 @@ function startBannerScrollTimer( timedelay ){
 function updateBannerWide(){
     var banner = document.querySelector('.banneritems');
     var bannerImg = document.getElementsByClassName('bannerImgs');
-    for(var i = 0; i < bannerImg.length; i++){
-        bannerImg[i].style.width = banner.clientWidth + 'px';
-    }
+    bannerImg[window.curBannerIdx].style.width = banner.clientWidth + 'px';
 }
 
 function initBannerImgs(){
@@ -58,9 +57,17 @@ function initBannerImgs(){
             scrollBanner(event.target.idx);
         }});
         bannerItem.idx = i;
+        bannerImg.style.width = banner.clientWidth + 'px'; 
         bannerImg.src = window.imgs[i];
     }
 }
+
+onStatusResizing( null,function(){
+    updateBannerWide();
+},function(){
+    window.curBannerIdx = 0;
+    scrollBanner(window.curBannerIdx);
+});
 
 window.onload = function(){
     /* 현재 메인에 표시되는 배너의 순서를 기억합니다 */
