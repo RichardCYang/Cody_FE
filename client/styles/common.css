@@ -1,4 +1,7 @@
 
+body {
+    min-width: 1024px;
+}
 header {
     position: relative;
     width: 100%;
@@ -13,6 +16,7 @@ header {
     position: relative;
     height: 100%;
     width: 1024px;
+    z-index: 1;
 }
 
 .userbox {
@@ -102,7 +106,6 @@ header {
     width: 128px;
     height: 64px;
     display: none;
-    z-index: 1;
 }
 
 .usermenu > div > button {
@@ -195,8 +198,8 @@ header {
 
 .maincontent {
     position: relative;
-    width: 1280px;
+    width: 1024px;
     height: 100%;
     top: 30px;
-    left: calc(50% - 640px);
+    left: calc(50% - 512px);
 }
