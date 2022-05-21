@@ -91,6 +91,37 @@ header {
     background: url('../icons/usericon.svg') !important;
     background-size: 100% 100% !important;
     height: 100%;
+    width: 24px;
+    padding-left: 0px !important;
+}
+
+.usermenu > div {
+    position: absolute;
+    left: -104px;
+    top: 28px;
+    width: 128px;
+    height: 64px;
+    display: none;
+    z-index: 1;
+}
+
+.usermenu > div > button {
+    position: relative;
+    width: 100%;
+    height: 24px;
+    padding: 0px;
+    display: block;
+    border: none;
+    background: white;
+    box-shadow: 0px 1px 4px rgb(205, 205, 205);
+    font-family: 'nanum_square';
+    color: #707070;
+    line-height: 1em;
+}
+
+.usermenu > div > button:hover {
+    background: #a8dbff;
+    color: white;
 }
 
 .unselectable {
