@@ -58,4 +58,12 @@
     <footer>
     </footer>
 </body>
+<!-- 9버전 이하 익스플로러 화면 표시 막기 (지원중단)-->
+<!--[if lte IE 9]>
+    <script>
+        window.onload = function(){
+            document.body.innerHTML = '';
+        }
+    </script>
+<![endif]-->
 </html>
