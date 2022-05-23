@@ -70,6 +70,12 @@ onStatusResizing( null,function(){
 });
 
 window.onload = function(){
+    var popup = window.createCustomPopup();
+    popup.center();
+    popup.setBackdropEnabled( true );
+    popup.setBackgroundColor(255,255,255);
+    popup.show();
+
     /* 현재 메인에 표시되는 배너의 순서를 기억합니다 */
     window.curBannerIdx = 0;
     /* 여기에 사용할 배너 이미지 경로들을 추가하시면 됩니다. */
