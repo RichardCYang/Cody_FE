@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/loginform.css">
     <script src="./scripts/common.js"></script>
+    <script src="./scripts/popup.js"></script>
+    <script src="./scripts/hooks.js"></script>
     <title>Cody</title>
 </head>
 <body>
@@ -48,7 +50,7 @@
             </div>
             <div class="inputField">
                 <div class="loginOptions">
-                    <button>아이디 찾기</button>
+                    <button onclick="hook_clicked('HOOK_CLICKED_FINDID')">아이디 찾기</button>
                     <bar></bar> 
                     <button>비밀번호 찾기</button>
                 </div>

@@ -1,6 +1,9 @@
 
+window.includeCSS('./styles/popup.css');
+
 window.createCustomPopup = function(){
     var _popup = document.createElement('popup');
+    _popup.backdrop = undefined;
     _popup.parent = document.body;
     _popup.loc_x = 0;
     _popup.loc_y = 0;
@@ -38,6 +41,23 @@ window.createCustomPopup = function(){
     _popup.setBackgroundColor = function( r,g,b ){
         this.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
     }
+    _popup.initAttributes = function( elmnt,attrib ){
+        if( !attrib.posX )      { attrib.posX = 0; }
+        if( !attrib.posY )      { attrib.posY = 0; }
+        if( !attrib.text )      { attrib.text = "CONTENT" }
+
+        elmnt.style.left = attrib.posX + 'px';
+        elmnt.style.top = attrib.posY + 'px';
+        elmnt.textContent = attrib.text;
+
+        for(var key in attrib){
+            if( elmnt.style[key] != undefined ){
+                elmnt.style[key] = attrib[key];
+            }
+        }
+
+        return attrib;
+    }
     _popup.addButton = function( attrib ){
         if( !attrib ){
             attrib = [];
@@ -46,13 +66,7 @@ window.createCustomPopup = function(){
         var button = document.createElement('button');
         button.style.position = 'absolute';
 
-        if( !attrib.posX ){ attrib.posX = 0; }
-        if( !attrib.posY ){ attrib.posY = 0; }
-        if( !attrib.text ){ attrib.text = "Button" }
-
-        button.style.left = attrib.posX + 'px';
-        button.style.top = attrib.posY + 'px';
-        button.textContent = attrib.text;
+        attrib = this.initAttributes( button,attrib );
 
         if( attrib.onClick ){
             button.onclick = attrib.onClick;
@@ -60,20 +74,44 @@ window.createCustomPopup = function(){
 
         this.appendChild( button );
     }
+    _popup.addSystemButtons = function(){
+        var buttonTray = document.createElement('div');
+        buttonTray.setAttribute('class','buttonTray');
+
+        var okBtn = document.createElement('button');
+        okBtn.textContent = '확인'
+        buttonTray.appendChild( okBtn );
+
+        var cancelBtn = document.createElement('button');
+        cancelBtn.textContent = '취소';
+        buttonTray.appendChild( cancelBtn );
+
+        cancelBtn.super = this;
+        cancelBtn.onclick = function(event){
+            if( this.super.parent ){
+                if( this.super.backdrop ){
+                    this.super.parent.removeChild( this.super.backdrop );
+                }
+                this.super.parent.removeChild( this.super );
+            }
+        };
+
+        this.appendChild(buttonTray);
+    }
     _popup.show = function(){
         if( this.isEnableBackdrop ){
-            var backdrop = document.createElement('div');
-            backdrop.style.position = 'fixed';
-            backdrop.style.left = '0px';
-            backdrop.style.top = '0px';
-            backdrop.style.width = '100%';
-            backdrop.style.height = '100%';
-            backdrop.style.background = 'rgb(42,42,42)';
-            backdrop.style.opacity = '0.6';
-            backdrop.style.zIndex = '64';
+            this.backdrop = document.createElement('div');
+            this.backdrop.style.position = 'fixed';
+            this.backdrop.style.left = '0px';
+            this.backdrop.style.top = '0px';
+            this.backdrop.style.width = '100%';
+            this.backdrop.style.height = '100%';
+            this.backdrop.style.background = 'rgb(42,42,42)';
+            this.backdrop.style.opacity = '0.6';
+            this.backdrop.style.zIndex = '64';
 
             if( this.parent ){
-                this.parent.appendChild( backdrop );
+                this.parent.appendChild( this.backdrop );
             }
         }
 
