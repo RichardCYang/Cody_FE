@@ -1,4 +1,19 @@
 
+window.loadPage = function( target,srcpath ){
+    var elem = document.querySelector( target );
+    /* Loading Page from the Server with AJAX */
+    var xhr = new XMLHttpRequest;
+    xhr.open('GET',srcpath,false);
+    xhr.send();
+
+    /* Parsing DOMTree from result data */
+    if( xhr.responseText ){
+        var domparser = new DOMParser;
+        var dom = domparser.parseFromString(xhr.responseText,'text/html');
+        elem.appendChild(dom.body.children[0]);
+    }    
+}
+
 window.includeCSS = function( url ){
     var link = document.createElement('link');
     link.rel = 'stylesheet';
@@ -54,20 +69,6 @@ function toggleOnlyLoggedElement(){
         if( !sessionStorage.session_id ){
             /* 세션 정보가 없으면 로그인 전용 요소들을 숨김 */
             elements[i].style.display = 'none';
-        }
-    }
-}
-
-function onUserMenuButton_clicked(){
-    this.isClicked = !this.isClicked;
-    var usermenu = document.querySelector('.usermenu');
-    if( usermenu ){
-        if( usermenu.children.length > 0 ){
-            if( this.isClicked ){
-                usermenu.children[0].style.display = 'block';
-            }else{
-                usermenu.children[0].style.display = 'none';
-            }
         }
     }
 }

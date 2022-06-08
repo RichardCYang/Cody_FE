@@ -4,75 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cody</title>
     <link rel="stylesheet" href="./styles/fontloader.css">
-    <link rel="stylesheet" href="./styles/common.css"> 
+    <link rel="stylesheet" href="./styles/common.css">
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/maincontent.css">
+    <link rel="stylesheet" href="./styles/loginform.css">
+    <link rel="stylesheet" href="./styles/regform.css">
     <link rel="stylesheet" href="./styles/board.css">
     <script src="./scripts/common.js"></script>
     <script src="./scripts/main.js"></script>
-    <title>Cody</title>
+    <script src="./scripts/hooks.js"></script>
 </head>
 <body>
-    <header>
-        <div class="header_wrap">
-            <h2 class="unselectable clickable" onclick="window.location.href = '../index.html'">코디</h2>
-            <div class="menubox">
-                <button class="unselectable clickable showonlylogged">내 프로필</button>
-                <button class="unselectable clickable" onclick="window.location.href = '../board.html'">커뮤니티</button>
-                <button class="unselectable clickable">로드맵</button>
-                <button class="unselectable clickable">가이드</button>
-                <div class="unselectable clickable usermenu" onclick="onUserMenuButton_clicked()">
-                    <div>
-                        <button onclick="window.location.href = '../loginform.html'">로그인</button>
-                        <button onclick="window.location.href = '../registerform.html'">회원가입</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <main>
-        <div class='sliderframe'>
-            <div class='slidercontent'>
-                <div class='sliderarea'>
-                    <div class="banneritems"></div>
-                </div>
-                <div class='contentIndexes'></div>
-            </div>
-        </div>
-        <div class="maincontent" style="height: 1024px;">
-            <div class="loadmap_header">
-                <h4>진로 로드맵</h4>
-                <button>더보기 ></button>
-            </div>
-            <div class="loadmap_content">
-                <div class="loadmap_card">
-                    <img class="loadmap_preview" src="./imgs/banner1.jpg">
-                    <h4>해외 호텔 조리사 되기</h4>
-                    <h3>호텔조리학과 | 떡볶이맛 칵테일</h3>
-                </div>
-                <div class="loadmap_card">
-                    <img class="loadmap_preview" src="./imgs/banner2.jpg">
-                    <h4>해외 호텔 조리사 되기</h4>
-                    <h3>호텔조리학과 | 떡볶이맛 칵테일</h3>
-                </div>
-                <div class="loadmap_card">
-                    <img class="loadmap_preview" src="./imgs/banner3.jpg">
-                    <h4>해외 호텔 조리사 되기</h4>
-                    <h3>호텔조리학과 | 떡볶이맛 칵테일</h3>
-                </div>
-            </div>
-        </div>
-    </main>
-    <footer>
-    </footer>
+    <script>window.loadPage('body','./frags/header.frg');</script>
+    <script>window.loadPage('body','./frags/index.frg');</script>
+    <!-- 9버전 이하 익스플로러 화면 표시 막기 (지원중단)-->
+    <!--[if lte IE 9]>
+        <script>
+            window.onload = function(){
+                document.body.innerHTML = '';
+            }
+        </script>
+    <![endif]-->
 </body>
-<!-- 9버전 이하 익스플로러 화면 표시 막기 (지원중단)-->
-<!--[if lte IE 9]>
-    <script>
-        window.onload = function(){
-            document.body.innerHTML = '';
-        }
-    </script>
-<![endif]-->
 </html>

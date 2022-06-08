@@ -5,6 +5,9 @@ function scrollBanner( scrollamount ){
     var banner = document.querySelector('.banneritems');
     var bannerIndex = document.querySelector('.contentIndexes');
 
+    if( !banner ) return;
+    if( !bannerIndex ) return;
+
     banner.style.left = (scrollamount * banner.clientWidth * -1) + 'px';
 
     setChangeSubClassName(bannerIndex,'normalIndex');
@@ -33,6 +36,10 @@ function startBannerScrollTimer( timedelay ){
 function updateBannerWide(){
     var banner = document.querySelector('.banneritems');
     var bannerImg = document.getElementsByClassName('bannerImgs');
+
+    if( !banner ) return;
+    if( !bannerImg ) return;
+
     bannerImg[window.curBannerIdx].style.width = banner.clientWidth + 'px';
 }
 
@@ -69,7 +76,7 @@ onStatusResizing( null,function(){
     scrollBanner(window.curBannerIdx);
 });
 
-window.onload = function(){
+function init_main(){
     /* 현재 메인에 표시되는 배너의 순서를 기억합니다 */
     window.curBannerIdx = 0;
     /* 여기에 사용할 배너 이미지 경로들을 추가하시면 됩니다. */
@@ -81,4 +88,8 @@ window.onload = function(){
     initBannerImgs();
     /* 5초 간격으로 배너를 회전(Spin) 시키는 타이머(Timer) 실행 */
     startBannerScrollTimer(5);
+}
+
+window.onload = function(){
+    init_main();
 }
